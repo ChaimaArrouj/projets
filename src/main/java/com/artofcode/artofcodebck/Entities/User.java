@@ -1,5 +1,6 @@
 package com.artofcode.artofcodebck.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import java.util.Set;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userid;
+    private Integer id;
     private String username;
     private String userlastname;
     private String usermail;
@@ -44,7 +45,13 @@ public class User implements Serializable {
     private Set<JobOffer>jobOffers;
 @OneToMany(mappedBy = "user")
     private Set<Challenges>challenges;
-
+@OneToMany(mappedBy = "user")
+    private Set<ReclamationCompetition>reclamationCompetitions;
+@OneToMany(mappedBy = "user")
+    private Set<Tutorial>tutorials;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<Comment> comments;
 
 }
 
